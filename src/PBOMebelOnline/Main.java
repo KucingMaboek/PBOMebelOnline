@@ -39,55 +39,58 @@ public class Main {
 //        stat.executeUpdate("drop table member");
 
         //Initializing table
+
         System.out.println("Membuat tabel");
 //        nama,provinsi,kota,alamat,tanggalLahir, noTelp,noKTP
         try {
             stat.executeUpdate("create table ekspedisi (" +
                     "idEkspedisi INTEGER PRIMARY KEY," +
-                    "namaEkspedisi TEXT NOT NULL," +
-                    "hargaPerkilo INTEGER NOT NULL);");
+                    "namaEkspedisi TEXT," +
+                    "hargaPerkilo INTEGER);");
         } catch (SQLException e){
             System.out.println(e.getMessage());
         }
         try {
             stat.executeUpdate("create  table member (" +
                     "idMember INTEGER PRIMARY KEY," +
-                    "namaMember TEXT NOT NULL," +
-                    "kotaKelahiran TEXT NOT NULL," +
-                    "tanggalLahir TEXT NOT NULL," +
-                    "alamat TEXT NOT NULL," +
-                    "noTelp TEXT NOT NULL," +
-                    "NIK TEXT NOT NULL);");
+                    "namaMember TEXT," +
+                    "kotaKelahiran TEXT," +
+                    "tanggalLahir TEXT," +
+                    "alamat TEXT," +
+                    "noTelp TEXT," +
+                    "NIK TEXT);");
         } catch (SQLException e){
             System.out.println(e.getMessage());
         }
         try {
             stat.executeUpdate("create  table kasir (" +
                     "idKasir INTEGER PRIMARY KEY," +
-                    "namaKasir TEXT NOT NULL," +
-                    "kotaKelahiran TEXT NOT NULL," +
-                    "tanggalLahir TEXT NOT NULL," +
-                    "alamat TEXT NOT NULL," +
-                    "noTelp TEXT NOT NULL," +
-                    "NIK TEXT NOT NULL," +
-                    "admin TEXT NOT NULL," +
-                    "idAkun TEXT NOT NULL UNIQUE," +
-                    "passwordAkun TEXT NOT NULL);");
+                    "namaKasir TEXT," +
+                    "kotaKelahiran TEXT," +
+                    "tanggalLahir TEXT," +
+                    "alamat TEXT," +
+                    "noTelp TEXT," +
+                    "NIK TEXT," +
+                    "admin TEXT," +
+                    "idAkun TEXT UNIQUE," +
+                    "passwordAkun TEXT);");
+
+            stat.executeUpdate("insert into kasir values (NULL,'Default\',\'Default\', \'Default\', \'Default\', \'Default\',\'Default\', \'true\', \'admin\', \'admin\');");
         } catch (SQLException e){
             System.out.println(e.getMessage());
         }
         try {
             stat.executeUpdate("create  table barang (" +
                     "idBarang INTEGER PRIMARY KEY," +
-                    "namaBarang TEXT NOT NULL," +
-                    "merkBarang TEXT NOT NULL," +
-                    "stok TEXT NOT NULL," +
-                    "hargaBarang TEXT NOT NULL," +
-                    "beratBarang TEXT NOT NULL," +
-                    "bahan TEXT NOT NULL," +
-                    "alokasi TEXT NOT NULL," +
-                    "tegangan TEXT NOT NULL," +
-                    "daya TEXT NOT NULL);");
+                    "namaBarang TEXT," +
+                    "merkBarang TEXT," +
+                    "stok TEXT," +
+                    "hargaBarang TEXT," +
+                    "beratBarang TEXT," +
+                    "bahan TEXT," +
+                    "alokasi TEXT," +
+                    "tegangan TEXT," +
+                    "daya TEXT);");
         } catch (SQLException e){
             System.out.println(e.getMessage());
         }

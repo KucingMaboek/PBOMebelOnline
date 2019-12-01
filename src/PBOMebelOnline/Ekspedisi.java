@@ -66,7 +66,7 @@ public class Ekspedisi implements CRUD {
 
     @Override
     public String deleteQuery() {
-        String query = String.format("update ekspedisi set namaEkspedisi = \'NULL\',hargaPerkilo = \'NULL\' where idEkspedisi = %s", getIdKurir());
+        String query = String.format("update ekspedisi set namaEkspedisi = NULL,hargaPerkilo = NULL where idEkspedisi = %s", getIdKurir());
         return query;
     }
 

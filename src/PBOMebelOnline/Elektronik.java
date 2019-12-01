@@ -34,7 +34,7 @@ public class Elektronik extends Barang implements CRUD{
 
     @Override
     public String createQuery() {
-        String query = String.format("insert into barang values (NULL,\'%s\',\'%s\',\'%s\',\'%s\',\'%s\',\'NULL\',\'NULL\',\'%s\',\'%s\');", getNamaBarang(),getMerk(), getStokBarang(),
+        String query = String.format("insert into barang values (NULL,\'%s\',\'%s\',\'%s\',\'%s\',\'%s\',NULL,NULL,\'%s\',\'%s\');", getNamaBarang(),getMerk(), getStokBarang(),
                 getHargaBarang(), getHargaBarang(), getVoltase(),getWatt());
         return query;
     }
@@ -42,7 +42,7 @@ public class Elektronik extends Barang implements CRUD{
     @Override
     public String updateQuery() {
         String query = String.format("update barang set namaBarang = \'%s\',merkBarang = \'%s\',stok = \'%s\',hargaBarang = \'%s\', " +
-                "beratBarang = \'%s\', bahan = \'NULL\', alokasi = \'NULL\', tegangan, \'%s\', daya = \'%s\' where idEkspedisi = %s", getNamaBarang(),getMerk(), getStokBarang(),
+                "beratBarang = \'%s\', bahan = NULL, alokasi = NULL, tegangan, \'%s\', daya = \'%s\' where idEkspedisi = %s", getNamaBarang(),getMerk(), getStokBarang(),
                 getHargaBarang(), getHargaBarang(), getVoltase(),getWatt(),getIdBarang());
         return query;
     }
@@ -101,7 +101,7 @@ public class Elektronik extends Barang implements CRUD{
         System.out.println("-------------");
         if (getNamaBarang().isBlank() || getMerk().isBlank()) {
             System.out.println("Mohon inputkan data dengan benar");
-N        }
+        }
         showBarang();
         System.out.print("Apakah data sudah benar? [Y/N] : ");
         if (dataIn.readLine().equalsIgnoreCase("Y")) {

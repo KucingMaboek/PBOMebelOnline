@@ -108,7 +108,7 @@ public class Person implements CRUD{ //masuk ke database member
 
     @Override
     public String deleteQuery() {
-        String query = String.format("update member set namaMember = \'NULL\',kotaKelahiran = \'NULL\', tanggalLahir = \'NULL\', alamat = \'NULL\', noTelp = \'NULL\', NIK = \'NULL\' where idPerson = %s", getIdMember());
+        String query = String.format("update member set namaMember = NULL,kotaKelahiran = NULL, tanggalLahir = NULL, alamat = NULL, noTelp = NULL, NIK = NULL where idPerson = %s", getIdMember());
         return query;
     }
 

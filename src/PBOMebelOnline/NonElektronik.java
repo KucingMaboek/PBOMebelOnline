@@ -32,7 +32,7 @@ public class NonElektronik extends Barang implements CRUD {
 
     @Override
     public String createQuery() {
-        String query = String.format("insert into barang values (NULL,\'%s\',\'%s\',\'%s\',\'%s\',\'%s\',\'%s\',\'%s\',\'NULL\',\'NULL\');", getNamaBarang(),getMerk(), getStokBarang(),
+        String query = String.format("insert into barang values (NULL,\'%s\',\'%s\',\'%s\',\'%s\',\'%s\',\'%s\',\'%s\',NULL,NULL);", getNamaBarang(),getMerk(), getStokBarang(),
                 getHargaBarang(), getHargaBarang(), getBahan(),getAlokasi());
         return query;
     }
@@ -40,7 +40,7 @@ public class NonElektronik extends Barang implements CRUD {
     @Override
     public String updateQuery() {
         String query = String.format("update barang set namaBarang = \'%s\',merkBarang = \'%s\',stok = \'%s\',hargaBarang = \'%s\', " +
-                        "beratBarang = \'%s\', bahan = \'%s\', alokasi = \'%s\', tegangan, \'NULL\', daya = \'NULL\' where idEkspedisi = %s", getNamaBarang(),getMerk(), getStokBarang(),
+                        "beratBarang = \'%s\', bahan = \'%s\', alokasi = \'%s\', tegangan, NULL, daya = NULL where idEkspedisi = %s", getNamaBarang(),getMerk(), getStokBarang(),
                 getHargaBarang(), getHargaBarang(), getBahan(),getAlokasi(),getIdBarang());
         return query;
     }
