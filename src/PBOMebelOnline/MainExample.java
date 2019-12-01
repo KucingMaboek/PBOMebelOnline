@@ -1,6 +1,7 @@
 package PBOMebelOnline;
 import java.sql.*;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 public class MainExample {
     public static void createNewDatabase(String filename){
@@ -15,9 +16,18 @@ public class MainExample {
             System.out.println(e.getMessage());
         }
     }
-    public static void main(String[] args) throws SQLException {
+
+
+    public static void main(String[] args) throws SQLException, InterruptedException {
         Scanner scan = new Scanner(System.in);
-        int pilihan;
+        Ekspedisi JNE = new Ekspedisi();
+        JNE.setNamaKurir(scan.nextLine());
+        JNE.setHargaPerkilo(scan.nextInt());
+        JNE.showKurir();
+        TimeUnit.SECONDS.sleep(3);
+        String id,pw,namaBarang,temp;
+        int hargaBarang,pilihan;
+
         System.out.println("Menyiapkan database");
         try {
             Class.forName("org.sqlite.JDBC");
@@ -40,7 +50,6 @@ public class MainExample {
             System.out.println(e.getMessage());
             System.out.println("tabel sudah ada");
         }
-        String id,pw;
 
         System.out.println("======================");
         System.out.println("Selamat datang di program meubel online, silahkan login untuk melanjutkan");
@@ -78,30 +87,30 @@ public class MainExample {
         System.out.println("pilihan benar");
 
         if (pilihan == 1){
-            System.out.print("Masukkan nama barang");
-            String namaBarang = scan.nextLine();
-            System.out.print("Masukkan harga barang");
-            int hargaBarang = scan.nextInt();
+            System.out.print("Masukkan nama barang :");
+            namaBarang = scan.nextLine();
+            System.out.print("Masukkan harga barang :");
+            hargaBarang = scan.nextInt();
             String sqlQuery = (String.format("insert into barang values (NULL,\'%s\',\'%s\');", namaBarang,hargaBarang));
             stat.executeUpdate(sqlQuery);
+
             System.out.println("Barang berhasil dimasukkan");
             System.out.println("========================");
         }
         if (pilihan == 2){
             System.out.println("Masukkan id atau nama barang");
-            String temp = scan.nextLine();
-            ResultSet search = stat.executeQuery("select * from barang;");
-            while (search.next()){
-                if (temp.equals(search.getString("idBarang")) || temp.equals(search.getString("namaBarang")))
+            temp = scan.next();
+            ResultSet searchBarang = stat.executeQuery("select * from barang;");
+            while (searchBarang.next()){
+                if (temp.equals(searchBarang.getString("idBarang")) || temp.equals(searchBarang.getString("namaBarang")))
                 { //mencari dengan cara mencocokkan inputan dengan idmember atau id. bisa di implemantasikan ke class barang
-                    System.out.println("idBarang = " + search.getString("idBarang"));
-                    System.out.println("nama barang = " + search.getString("namaBarang"));
-                    System.out.println("harga barang = " + search.getString("hargaBarang"));
-                    System.out.println("login berhasil");
+                    System.out.println("idBarang = " + searchBarang.getString("idBarang"));
+                    System.out.println("nama barang = " + searchBarang.getString("namaBarang"));
+                    System.out.println("harga barang = " + searchBarang.getString("hargaBarang"));
 //                System.out.println("ditemukan pada id ke-" + search.getString("idMember"));
                     break;
                 }
-                System.out.println("tidak ditemukan pada id ke-" + search.getString("idMember"));
+                System.out.println("tidak ditemukan pada id ke-" + searchBarang.getString("idBarang"));
             }
         }
 //        if (id.equals("admin")){
