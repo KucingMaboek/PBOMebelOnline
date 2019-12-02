@@ -53,7 +53,7 @@ public class Elektronik extends Barang implements CRUD{
     }
 
     @Override
-    public void menu() throws Exception {
+    public void menu(boolean admin) throws Exception {
 
     }
 

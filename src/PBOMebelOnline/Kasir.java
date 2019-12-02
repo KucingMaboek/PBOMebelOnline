@@ -84,7 +84,7 @@ public class Kasir extends Person implements CRUD{ //masuk ke database kasir
     }
 
     @Override
-    public void menu() throws Exception {
+    public void menu(boolean admin) throws Exception {
         Connection conn = DriverManager.getConnection("jdbc:sqlite:MebelOnline.db");
         Statement stat = conn.createStatement();
         ResultSet searchPerson;
@@ -92,7 +92,17 @@ public class Kasir extends Person implements CRUD{ //masuk ke database kasir
         int pilihan;
         menuMember:
         while (true) {
-            System.out.println("Pilih menu kasir: \n1.Tambah data kasir\n2.Lihat daftar kasir\n3.telusuri kasir\n4.Edit data kasir\n5.hapus kasir\n0.Kembali");
+            if (admin == false){
+                System.out.println("Maaf hanya admin yang bisa mengakses menu ini");
+                break;
+            }
+            System.out.println("Pilih menu kasir: " +
+                    "\n1.Tambah data kasir" +
+                    "\n2.Lihat daftar kasir" +
+                    "\n3.telusuri kasir" +
+                    "\n4.Edit data kasir" +
+                    "\n5.hapus kasir" +
+                    "\n0.Kembali");
             System.out.print("Masukkan pilihan menu:");
             pilihan = Integer.parseInt(dataIn.readLine());
             switch (pilihan) {
@@ -186,7 +196,7 @@ public class Kasir extends Person implements CRUD{ //masuk ke database kasir
                 case 4:
                     System.out.println("-------------");
                     searchPerson = stat.executeQuery("select * from kasir");
-                    System.out.println("Masukkan id kasir");
+                    System.out.print("Masukkan id kasir");
                     temp = dataIn.readLine();
                     while (searchPerson.next()) {
                         if (temp.equals(searchPerson.getString("idKasir")) || temp.equals(searchPerson.getString("namaKasir"))) { //mencari dengan cara mencocokkan inputan dengan idkasir atau id. bisa di implemantasikan ke class barang

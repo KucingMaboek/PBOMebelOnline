@@ -113,7 +113,7 @@ public class Person implements CRUD{ //masuk ke database member
     }
 
     @Override
-    public void menu() throws Exception {
+    public void menu(boolean admin) throws Exception {
         Connection conn = DriverManager.getConnection("jdbc:sqlite:MebelOnline.db");
         Statement stat = conn.createStatement();
         ResultSet searchPerson;
@@ -121,7 +121,13 @@ public class Person implements CRUD{ //masuk ke database member
         int pilihan;
         menuMember:
         while (true) {
-            System.out.println("Pilih menu member: \n1.Tambah data member\n2.Lihat daftar member\n3.telusuri member\n4.Edit data member\n5.hapus member\n0.Kembali");
+            System.out.println("Pilih menu member: " +
+                    "\n1.Tambah data member" +
+                    "\n2.Lihat daftar member" +
+                    "\n3.telusuri member" +
+                    "\n4.Edit data member" +
+                    "\n5.hapus member" +
+                    "\n0.Kembali");
             System.out.print("Masukkan pilihan menu:");
             pilihan = Integer.parseInt(dataIn.readLine());
             switch (pilihan) {
@@ -194,6 +200,10 @@ public class Person implements CRUD{ //masuk ke database member
                     System.out.println("-------------");
                     break;
                 case 4:
+                    if (admin == false){
+                        System.out.println("Maaf hanya admin yang bisa mengakses menu ini");
+                        break;
+                    }
                     System.out.println("-------------");
                     searchPerson = stat.executeQuery("select * from member");
                     System.out.println("Masukkan id member");
@@ -238,6 +248,10 @@ public class Person implements CRUD{ //masuk ke database member
                     System.out.println("-------------");
                     break;
                 case 5:
+                    if (admin == false){
+                        System.out.println("Maaf hanya admin yang bisa mengakses menu ini");
+                        break;
+                    }
                     System.out.println("-------------");
                     searchPerson = stat.executeQuery("select  * from member");
                     System.out.print("Masukkan id atau nama member: ");

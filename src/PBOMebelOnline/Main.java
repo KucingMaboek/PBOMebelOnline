@@ -14,6 +14,7 @@ public class Main {
     private static Person member = new Person();
     private static Person kasir = new Kasir();
     private static Barang barang = new Barang();
+    private static Transaksi transaksi = new Transaksi();
     private static boolean status;
     private static BufferedReader dataIn = new BufferedReader(new InputStreamReader(System.in));
 
@@ -94,6 +95,19 @@ public class Main {
         } catch (SQLException e){
             System.out.println(e.getMessage());
         }
+        try {
+            stat.executeUpdate("create  table kasir (" +
+                    "idTransaksi TEXT" +
+                    "pelayan TEXT," +
+                    "member TEXT," +
+                    "kurir TEXT," +
+                    "barang TEXT," +
+                    "banyakBarang TEXT);");
+
+            stat.executeUpdate("insert into kasir values (NULL,'Default\',\'Default\', \'Default\', \'Default\', \'Default\',\'Default\', \'true\', \'admin\', \'admin\');");
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
 
         System.out.println("===============");
 
@@ -110,6 +124,7 @@ public class Main {
                 if (tempID.equals(loginId.getString("idAkun")) && tempPW.equals(loginId.getString("passwordAkun"))) { //mencari dengan cara mencocokkan inputan dengan idmember atau id. bisa di implemantasikan ke class barang
                     status = Boolean.parseBoolean(loginId.getString("admin"));
                     namaPelayan = loginId.getString(("namaKasir"));
+                    transaksi.setIdPegawai(loginId.getString("idKasir"));
                     System.out.println("login berhasil");
                     System.out.println("==================");
                     if (status){System.out.println(String.format("selamat datang %s, anda login sebagai administrator", namaPelayan));}
@@ -145,19 +160,19 @@ public class Main {
             pilihan = Integer.parseInt(dataIn.readLine());
             switch (pilihan) {
                 case 1:
-                    System.out.println("under maintenance");
+                    transaksi.menu(status);
                     break;
                 case 2:
-                    kasir.menu();
+                    kasir.menu(status);
                     break;
                 case 3:
-                    member.menu();
+                    member.menu(status);
                     break;
                 case 4:
-                    barang.menu();
+                    barang.menu(status);
                     break;
                 case 5:
-                    kurir.menu();
+                    kurir.menu(status);
                     break;
                 case 6:
                     break home;

@@ -71,7 +71,7 @@ public class Barang implements CRUD{
         this.beratBarang = beratBarang;
     }
 
-    public void showBarang() throws IOException {
+    public void showBarang(){
         System.out.print("Nama barang adalah:");
         System.out.println(getNamaBarang());
         System.out.print("Nama merk adalah:");
@@ -87,12 +87,12 @@ public class Barang implements CRUD{
     @Override
     public String createQuery() {
         return null;
-    }
+    } //not used
 
     @Override
     public String updateQuery() {
         return null;
-    }
+    } //not used
 
     @Override
     public String deleteQuery() {
@@ -102,7 +102,7 @@ public class Barang implements CRUD{
     }
 
     @Override
-    public void menu() throws Exception {
+    public void menu(boolean admin) throws Exception {
         Connection conn = DriverManager.getConnection("jdbc:sqlite:MebelOnline.db");
         Statement stat = conn.createStatement();
         ResultSet searchBarang;
@@ -130,7 +130,6 @@ public class Barang implements CRUD{
                     break;
                 case 3:
                     System.out.println("-------------");
-                    searchBarang = stat.executeQuery("select * from barang");
                     ResultSet rs = stat.executeQuery("select * from barang;");
                     System.out.print("idBarang");
                     System.out.print("    Nama barang");
@@ -178,12 +177,24 @@ public class Barang implements CRUD{
                     System.out.println("-------------");
                     break;
                 case 5:
+                    if (admin == false){
+                        System.out.println("Maaf hanya admin yang bisa mengakses menu ini");
+                        break;
+                    }
                     nonElektro.editNonElektronik();
                     break;
                 case 6:
+                    if (admin == false){
+                        System.out.println("Maaf hanya admin yang bisa mengakses menu ini");
+                        break;
+                    }
                     elektro.editElektronik();
                     break;
                 case 7:
+                    if (admin == false){
+                        System.out.println("Maaf hanya admin yang bisa mengakses menu ini");
+                        break;
+                    }
                     System.out.println("-------------");
                     searchBarang = stat.executeQuery("select  * from barang");
                     System.out.print("Masukkan id atau nama barang: ");

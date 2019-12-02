@@ -72,7 +72,7 @@ public class Ekspedisi implements CRUD {
 
 
     @Override
-    public void menu() throws Exception {
+    public void menu(boolean admin) throws Exception {
         Connection conn = DriverManager.getConnection("jdbc:sqlite:MebelOnline.db");
         Statement stat = conn.createStatement();
         ResultSet searchEkspedisi;
@@ -80,7 +80,12 @@ public class Ekspedisi implements CRUD {
         int pilihan;
         menuEkspedisi:
         while (true) {
-            System.out.println("Pilih menu transaksi: \n1.Tambah data mitra ekspedisi\n2.Lihat daftar mitra ekspedisi\n3.telusuri ekspedisi\n4.Edit data mitra ekspedisi\n5.hapus data mitra ekspedisi\n0.Kembali");
+            System.out.println("Pilih menu transaksi: " +
+                    "\n1.Tambah data mitra ekspedisi" +
+                    "\n2.Lihat daftar mitra ekspedisi" +
+                    "\n3.telusuri ekspedisi" +
+                    "\n4.Edit data mitra ekspedisi" +
+                    "\n5.hapus data mitra ekspedisi\n0.Kembali");
             System.out.print("Masukkan pilihan menu:");
             pilihan = Integer.parseInt(dataIn.readLine());
             switch (pilihan) {
@@ -134,6 +139,10 @@ public class Ekspedisi implements CRUD {
                     System.out.println("-------------");
                     break;
                 case 4:
+                    if (admin == false){
+                        System.out.println("Maaf hanya admin yang bisa mengakses menu ini");
+                        break;
+                    }
                     System.out.println("-------------");
                     searchEkspedisi = stat.executeQuery("select * from ekspedisi");
                     System.out.println("Masukkan id ekspedisi");
@@ -168,6 +177,10 @@ public class Ekspedisi implements CRUD {
                     System.out.println("-------------");
                     break;
                 case 5:
+                    if (admin == false){
+                        System.out.println("Maaf hanya admin yang bisa mengakses menu ini");
+                        break;
+                    }
                     System.out.println("-------------");
                     searchEkspedisi = stat.executeQuery("select  * from ekspedisi");
                     System.out.print("Masukkan id atau nama ekspedisi: ");
