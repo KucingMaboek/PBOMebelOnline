@@ -157,8 +157,8 @@ public class Transaksi implements CRUD {
 
         searchTransaksi = stat.executeQuery("select * from transaksi");
         searchPerson = stat.executeQuery("select * from member");
-        searchBarang = stat.executeQuery("select * from barang");
-        searchEkspedisi = stat.executeQuery("select * from ekspedisi");
+//        searchBarang = stat.executeQuery("select * from barang");
+//        searchEkspedisi = stat.executeQuery("select * from ekspedisi");
 
         String temp;
         int pilihan;
@@ -179,6 +179,7 @@ public class Transaksi implements CRUD {
                     System.out.println("Menambah data transaksi");
 
                     //get last transaction id
+                    searchTransaksi = stat.executeQuery("select * from transaksi");
                     while (searchTransaksi.next()){
                         idTransaksi+=1;
                     }
@@ -186,8 +187,11 @@ public class Transaksi implements CRUD {
                     while (true) {
                         System.out.println("Masukkan id atau nama barang");
                         temp = dataIn.readLine();
+                        searchBarang = stat.executeQuery("select * from barang");
+//                        System.out.println(searchBarang.next());
                         tambahBarang:
                         while (searchBarang.next()) {
+//                            System.out.println("masuk search barang");
                             if (temp.equals(searchBarang.getString("idBarang"))
                                     || temp.equals(searchBarang.getString("namaBarang"))) { //mencari dengan cara mencocokkan inputan dengan idmember atau id. bisa di implemantasikan ke class barang
                                 if (Integer.parseInt(searchBarang.getString("stok")) < 1) {
@@ -237,6 +241,8 @@ public class Transaksi implements CRUD {
                     }
 
                     System.out.println("Masukkan id atau nama ekspedisi");
+                    temp = dataIn.readLine();
+                    searchEkspedisi = stat.executeQuery("select * from ekspedisi");
                     while (searchEkspedisi.next()) {
                         if (temp.equals(searchEkspedisi.getString("idEkspedisi")) || temp.equals(searchEkspedisi.getString("namaEkspedisi"))) { //mencari dengan cara mencocokkan inputan dengan idmember atau id. bisa di implemantasikan ke class barang
                             setIdKurir(searchEkspedisi.getString("idEkspedisi"));
@@ -245,6 +251,8 @@ public class Transaksi implements CRUD {
                     }
 
                     System.out.println("Masukkan id atau nama member");
+                    temp = dataIn.readLine();
+                    searchPerson = stat.executeQuery("select * from member");
                     while (searchPerson.next()) {
                         if (temp.equals(searchPerson.getString("idPerson")) || temp.equals(searchPerson.getString("namaMember"))) { //mencari dengan cara mencocokkan inputan dengan idmember atau id. bisa di implemantasikan ke class barang
                             setIdMember(searchPerson.getString("idMember"));
@@ -282,12 +290,14 @@ public class Transaksi implements CRUD {
                         System.out.print("  " + searchTransaksi.getString("barang"));
                         System.out.println("  " + searchTransaksi.getString("banyakBarang"));
                     }
+                    System.out.println();
                     System.out.println("-------------");
                     break;
                 case 3:
                     System.out.println("-------------");
                     System.out.println("Masukkan id transaksi");
                     temp = dataIn.readLine();
+                    searchEkspedisi = stat.executeQuery("select * from ekspedisi");
                     while (searchEkspedisi.next()) {
                         if (temp.equals(searchEkspedisi.getString("idTransaksi"))) { //mencari dengan cara mencocokkan inputan dengan idmember atau id. bisa di implemantasikan ke class barang
                             System.out.println("idTransaksi = " + searchTransaksi.getString("idTransaksi"));
@@ -308,8 +318,9 @@ public class Transaksi implements CRUD {
                     System.out.println("-------------");
                     System.out.print("Masukkan id: ");
                     temp = dataIn.readLine();
+                    searchTransaksi = stat.executeQuery("select * from transaksi");
                     while (searchTransaksi.next()) {
-                        if (temp.equals(searchEkspedisi.getString("idTransaksi"))) { //mencari dengan cara mencocokkan inputan dengan idmember atau id. bisa di implemantasikan ke class barang
+                        if (temp.equals(searchTransaksi.getString("idTransaksi"))) { //mencari dengan cara mencocokkan inputan dengan idmember atau id. bisa di implemantasikan ke class barang
                             System.out.println("idTransaksi = " + searchTransaksi.getString("idTransaksi"));
                             System.out.println("Pelayan = " + searchTransaksi.getString("pelayan"));
                             System.out.println("Member = " + searchTransaksi.getString("member"));

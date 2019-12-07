@@ -8,6 +8,7 @@ public class DatabaseManager {
     }
 
     public static void createNewDatabase(String filename){
+        System.out.println("Membuat database " + filename);
         String url = "jdbc:sqlite:" + filename;
         try (Connection conn = DriverManager.getConnection(url)){
             if (conn != null){
@@ -21,7 +22,7 @@ public class DatabaseManager {
     }
 
     public void createNewTable() throws ClassNotFoundException, SQLException {
-        System.out.println("Membuat tabel");
+//        System.out.println("Membuat tabel");
         Connection conn = null;
         try {
             conn = DriverManager.getConnection("jdbc:sqlite:MebelOnline.db");
@@ -34,7 +35,6 @@ public class DatabaseManager {
         Class.forName("org.sqlite.JDBC");
 
         //Initializing database
-        System.out.println("Membuat database MebelOnline.db");
         createNewDatabase("MebelOnline.db");
 
         conn = null;
@@ -47,7 +47,14 @@ public class DatabaseManager {
 
 //        stat.executeUpdate("drop table member");
 
+
+
         //Initializing table
+//        stat.executeUpdate("drop table ekspedisi");
+//        stat.executeUpdate("drop table kasir");
+//        stat.executeUpdate("drop table member");
+//        stat.executeUpdate("drop table barang");
+//        stat.executeUpdate("drop table transaksi");
 
         System.out.println("Membuat tabel");
 //        nama,provinsi,kota,alamat,tanggalLahir, noTelp,noKTP
@@ -81,7 +88,7 @@ public class DatabaseManager {
                     "noTelp TEXT," +
                     "NIK TEXT," +
                     "admin TEXT," +
-                    "idAkun TEXT UNIQUE," +
+                    "idAkun TEXT," +
                     "passwordAkun TEXT);");
 
             stat.executeUpdate("insert into kasir values (NULL,'Default\',\'Default\', \'Default\', \'Default\', \'Default\',\'Default\', \'true\', \'admin\', \'admin\');");
@@ -104,7 +111,7 @@ public class DatabaseManager {
             System.out.println(e.getMessage());
         }
         try {
-            stat.executeUpdate("create  table kasir (" +
+            stat.executeUpdate("create  table transaksi (" +
                     "idTransaksi TEXT" +
                     "pelayan TEXT," +
                     "member TEXT," +
@@ -117,5 +124,6 @@ public class DatabaseManager {
             System.out.println(e.getMessage());
         }
         conn.close();
+        System.out.println("===============");
     }
 }

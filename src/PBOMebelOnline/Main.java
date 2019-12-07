@@ -20,18 +20,18 @@ public class Main {
         String tempID,tempPW;
         int i = 2;
 
-        System.out.println("===============");
+//        System.out.println("===============");
         Class.forName("org.sqlite.JDBC");
-
-        //Initializing database
-        System.out.println("Membuat database MebelOnline.db");
-        dbManager.createNewDatabase("MebelOnline.db");
+//
+//        //Initializing database
+//        System.out.println("Membuat database MebelOnline.db");
+//        dbManager.createNewDatabase("MebelOnline.db");
         dbManager.createNewTable();
-
+//
         Connection conn = DriverManager.getConnection("jdbc:sqlite:MebelOnline.db");
         Statement stat = conn.createStatement();
-
-        System.out.println("===============");
+//
+//        System.out.println("===============");
 
         System.out.println("Selamat datang di program POS furniture, silahkan login terlebih dahulu:");
         login:
