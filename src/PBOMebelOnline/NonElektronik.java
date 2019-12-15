@@ -33,15 +33,15 @@ public class NonElektronik extends Barang implements CRUD {
     @Override
     public String createQuery() {
         String query = String.format("insert into barang values (NULL,\'%s\',\'%s\',\'%s\',\'%s\',\'%s\',\'%s\',\'%s\',NULL,NULL);", getNamaBarang(),getMerk(), getStokBarang(),
-                getHargaBarang(), getHargaBarang(), getBahan(),getAlokasi());
+                getHargaBarang(), getBeratBarang(), getBahan(),getAlokasi());
         return query;
     }
 
     @Override
     public String updateQuery() {
-        String query = String.format("update barang set namaBarang = \'%s\',merkBarang = \'%s\',stok = \'%s\',hargaBarang = \'%s\', " +
-                        "beratBarang = \'%s\', bahan = \'%s\', alokasi = \'%s\', tegangan, NULL, daya = NULL where idEkspedisi = %s", getNamaBarang(),getMerk(), getStokBarang(),
-                getHargaBarang(), getHargaBarang(), getBahan(),getAlokasi(),getIdBarang());
+        String query = String.format("update barang set namaBarang = \'%s\', merkBarang = \'%s\', stok = \'%s\', hargaBarang = \'%s\', " +
+                        "beratBarang = \'%s\', bahan = \'%s\', alokasi = \'%s\', tegangan = NULL, daya = NULL where idBarang = %s", getNamaBarang(),getMerk(), getStokBarang(),
+                getHargaBarang(), getBeratBarang(), getBahan(),getAlokasi(),getIdBarang());
         return query;
     }
 

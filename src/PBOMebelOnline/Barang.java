@@ -13,7 +13,7 @@ public class Barang implements CRUD{
     private String merk;
     private int stokBarang;
     private int hargaBarang;
-    private double beratBarang;
+    private int beratBarang;
 
     public Barang() {
         this.namaBarang = namaBarang;
@@ -63,11 +63,11 @@ public class Barang implements CRUD{
         this.hargaBarang = hargaBarang;
     }
 
-    public double getBeratBarang() {
+    public int getBeratBarang() {
         return beratBarang;
     }
 
-    public void setBeratBarang(double beratBarang) {
+    public void setBeratBarang(int beratBarang) {
         this.beratBarang = beratBarang;
     }
 

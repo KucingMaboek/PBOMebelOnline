@@ -112,7 +112,7 @@ public class DatabaseManager {
         }
         try {
             stat.executeUpdate("create  table transaksi (" +
-                    "idTransaksi TEXT" +
+                    "idTransaksi TEXT," +
                     "pelayan TEXT," +
                     "member TEXT," +
                     "kurir TEXT," +

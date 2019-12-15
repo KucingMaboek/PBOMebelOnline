@@ -35,15 +35,15 @@ public class Elektronik extends Barang implements CRUD{
     @Override
     public String createQuery() {
         String query = String.format("insert into barang values (NULL,\'%s\',\'%s\',\'%s\',\'%s\',\'%s\',NULL,NULL,\'%s\',\'%s\');", getNamaBarang(),getMerk(), getStokBarang(),
-                getHargaBarang(), getHargaBarang(), getVoltase(),getWatt());
+                getHargaBarang(), getBeratBarang(), getVoltase(),getWatt());
         return query;
     }
 
     @Override
     public String updateQuery() {
         String query = String.format("update barang set namaBarang = \'%s\',merkBarang = \'%s\',stok = \'%s\',hargaBarang = \'%s\', " +
-                "beratBarang = \'%s\', bahan = NULL, alokasi = NULL, tegangan, \'%s\', daya = \'%s\' where idEkspedisi = %s", getNamaBarang(),getMerk(), getStokBarang(),
-                getHargaBarang(), getHargaBarang(), getVoltase(),getWatt(),getIdBarang());
+                "beratBarang = \'%s\', bahan = NULL, alokasi = NULL, tegangan, \'%s\', daya = \'%s\' where idBarang = %s", getNamaBarang(),getMerk(), getStokBarang(),
+                getHargaBarang(), getBeratBarang(), getVoltase(),getWatt(),getIdBarang());
         return query;
     }
 
