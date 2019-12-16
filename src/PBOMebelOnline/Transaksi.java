@@ -141,7 +141,7 @@ public class Transaksi implements CRUD {
 
     @Override
     public String deleteQuery() {
-        String query = String.format("update transaksi set idTransaksi = NULL,pelayan = NULL,member = NULL,kurir = NULL,barang = NULL,banyakBarang = NULL where idTransaksi = %s",
+        String query = String.format("update transaksi set pelayan = NULL,member = NULL,kurir = NULL,barang = NULL,banyakBarang = NULL where idTransaksi = %s",
                 getIdTransaksi());
         return query;
     }
@@ -226,6 +226,9 @@ public class Transaksi implements CRUD {
                             System.out.println("-------------");
                         }
                         else {
+                            if (barang.size() <= 0){
+                                break menuTransaksi;
+                            }
                             System.out.println("-------------");
                             break;
                         }
@@ -250,8 +253,8 @@ public class Transaksi implements CRUD {
                         System.out.println("  " + totalPerItem.get(i));
                     }
                     for (int a = 0; a < barang.size() ; a++) {
-                        System.out.println("total saat ini = " + total);
-                        System.out.println("berat yang akan ditambahkan = " + beratBarang.get(a));
+//                        System.out.println("total saat ini = " + total);
+//                        System.out.println("berat yang akan ditambahkan = " + beratBarang.get(a));
                         total = total + beratBarang.get(a);
                     }
 
@@ -291,7 +294,7 @@ public class Transaksi implements CRUD {
                     System.out.println("apakah data sudah benar?[Y/N]");
                     temp = dataIn.readLine();
                     if (temp.equalsIgnoreCase("y")){
-                        System.out.println("program masuk");
+//                        System.out.println("program masuk");
                         for (int i = 0; i < barang.size(); i++) {
                             setIdBarang(barang.get(i));
                             setBanyakBarangPerItem(banyakBarang.get(i));
@@ -378,6 +381,7 @@ public class Transaksi implements CRUD {
                     System.out.println("-------------");
                     System.out.print("Masukkan id: ");
                     temp = dataIn.readLine();
+                    setIdTransaksi(Integer.parseInt(temp));
                     searchTransaksi = stat.executeQuery("select * from transaksi");
                     while (searchTransaksi.next()) {
                         if (temp.equals(searchTransaksi.getString("idTransaksi"))) { //mencari dengan cara mencocokkan inputan dengan idmember atau id. bisa di implemantasikan ke class barang
@@ -395,6 +399,7 @@ public class Transaksi implements CRUD {
                         }
                     }
                     System.out.println("-------------");
+                    break;
                 case 0:
                     conn.close();
                     System.out.println("==================");
