@@ -253,8 +253,6 @@ public class Transaksi implements CRUD {
                         System.out.println("  " + totalPerItem.get(i));
                     }
                     for (int a = 0; a < barang.size() ; a++) {
-//                        System.out.println("total saat ini = " + total);
-//                        System.out.println("berat yang akan ditambahkan = " + beratBarang.get(a));
                         total = total + beratBarang.get(a);
                     }
 
@@ -326,31 +324,19 @@ public class Transaksi implements CRUD {
                     System.out.print("    Kurir");
                     System.out.print("    Barang");
                     System.out.println("    Banyak Barang");
-                    searchTransaksi = stat.executeQuery("select * from transaksi");
+                    searchTransaksi = stat.executeQuery("select t1.idTransaksi ,t4.namaKasir,t3.namaMember,t5.namaEkspedisi, t2.namaBarang, t1.banyakBarang\n" +
+                            "from transaksi t1\n" +
+                            "join barang t2 on t1.barang = t2.idBarang\n" +
+                            "join member t3 on t1.member = t3.idMember\n" +
+                            "join kasir t4 on t1.pelayan = t4.idKasir\n" +
+                            "join ekspedisi t5 on t1.kurir = t5.idEkspedisi\n");
                     while (searchTransaksi.next()) {
                         System.out.print(searchTransaksi.getString("idTransaksi"));
-                        System.out.print("  " + searchTransaksi.getString("pelayan"));
+                        System.out.print("  " + searchTransaksi.getString("namaKasir"));
 
-                        System.out.print("  " + searchTransaksi.getString("member"));
+                        System.out.print("  " + searchTransaksi.getString("namaMember"));
 
-//                        temp = searchTransaksi.getString("kurir");
-//                        searchPerson = stat.executeQuery("select * from member");
-//                        while (searchPerson.next()) {
-//
-//                            if (temp.equals(searchPerson.getString("idMember"))) { //mencari dengan cara mencocokkan inputan dengan idmember atau id. bisa di implemantasikan ke class barang
-//                                System.out.print("    " + searchPerson.getString("namaMember"));
-//                            }
-//                        }
-
-
-//                        System.out.print("  " + searchTransaksi.getString("kurir"));
-//                        searchEkspedisi = stat.executeQuery("select * from ekspedisi");
-//                        while (searchEkspedisi.next()) {
-//                            if (temp.equals(searchEkspedisi.getString("idEkspedisi"))) { //mencari dengan cara mencocokkan inputan dengan idmember atau id. bisa di implemantasikan ke class barang
-//                                System.out.print("    " + searchEkspedisi.getString("namaEkspedisi"));
-//                            }
-//                        }
-                        System.out.print("  " + searchTransaksi.getString("barang"));
+                        System.out.print("  " + searchTransaksi.getString("namaBarang"));
                         System.out.println("  " + searchTransaksi.getString("banyakBarang"));
                     }
                     System.out.println();

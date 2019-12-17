@@ -28,7 +28,11 @@ public class Barang implements CRUD{
     }
 
     public void setIdBarang(String idBarang) {
+
         this.idBarang = idBarang;
+
+
+
     }
 
     public String getNamaBarang() {
